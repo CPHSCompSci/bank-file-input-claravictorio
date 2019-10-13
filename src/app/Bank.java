@@ -1,5 +1,7 @@
 package app;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Bank {
@@ -76,8 +78,23 @@ public class Bank {
 	}
 
 	public void saveAccounts(String filename) {
-		// TODO
-		log("Save not yet implemented.");
+		try {
+			
+			FileWriter fw = new FileWriter(filename);
+			
+			for (int i = 0; i < accounts.size(); i ++)
+			{
+				fw.append("Name: " + accounts.get(i).name + "\n");
+				fw.append("Account Number: " + accounts.get(i).accountNumber + "\n");
+				fw.append("Balance: $" + accounts.get(i).balance + "\n");
+				fw.append("\n");
+			}
+			fw.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		log("Successfully saved accounts to Accounts.txt");
 	}
 
 	public void loadAccounts(String filename) {

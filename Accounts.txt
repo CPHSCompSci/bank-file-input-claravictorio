@@ -1,0 +1,8 @@
+Name: clara
+Account Number: 1
+Balance: $0
+
+Name: ben
+Account Number: 2
+Balance: $0
+
