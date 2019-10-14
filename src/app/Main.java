@@ -11,6 +11,7 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 		int selection;
 		boolean quit = false;
+		bank.loadAccounts("Accounts.txt");
 		
 		do {
 			System.out.println("0. Quit");
@@ -66,11 +67,10 @@ public class Main {
 			bank.withdraw(fromAcct, amt);
 			bank.deposit(toAcct, amt);
 			break;
-		case 7:
-			bank.saveAccounts("Accounts.txt");
-			break;
 		case 0:
+			bank.saveAccounts("Accounts.txt");
 			quit = true;
+			break;
 		} }
 		while (!quit);
 		

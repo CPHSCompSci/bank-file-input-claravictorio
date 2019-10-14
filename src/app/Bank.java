@@ -1,8 +1,12 @@
 package app;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Bank {
 	// Variable for logging/not logging
@@ -98,8 +102,29 @@ public class Bank {
 	}
 
 	public void loadAccounts(String filename) {
-		// TODO
-		log("Load not yet implemented.");
+
+		try {
+			File inputFile = new File("Accounts.txt");
+			Scanner fileIn = new Scanner(inputFile);
+			if (fileIn.hasNextLine())
+			{
+			do {
+			String nameLine = fileIn.nextLine();
+			String acctNoLine = fileIn.nextLine();
+			String balanceLine = fileIn.nextLine();
+			fileIn.nextLine();
+			String name = nameLine.substring(6);
+			int balance = Integer.parseInt(balanceLine.substring(10));
+			Account acct = new Account(name, balance);
+			accounts.add(acct);
+			} while (fileIn.hasNextLine());
+			fileIn.close();
+			log("Successfully loaded existing accounts");
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private Account findAccount(int accountNumber) {
@@ -127,6 +152,12 @@ public class Bank {
 		private Account(String name) {
 			this.name = name;
 			balance = 0;
+			accountNumber = accountCounter++;
+		}
+		
+		private Account(String name, int balance) {
+			this.name = name;
+			this.balance = balance;
 			accountNumber = accountCounter++;
 		}
 

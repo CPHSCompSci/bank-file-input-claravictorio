@@ -1,8 +1,8 @@
-Name: clara
+Name: Clara
 Account Number: 1
-Balance: $0
+Balance: $96
 
-Name: ben
+Name: Bob
 Account Number: 2
-Balance: $0
+Balance: $50
 
