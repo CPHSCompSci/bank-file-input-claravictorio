@@ -5,7 +5,6 @@ public class Main {
 
 	public static void main(String[] args) 
 	{
-		// example1();
 		
 		Bank bank = new Bank("The Bank");
 		Scanner scan = new Scanner(System.in);
@@ -14,14 +13,13 @@ public class Main {
 		bank.loadAccounts("Accounts.txt");
 		
 		do {
-			System.out.println("0. Quit");
 			System.out.println("1. Deposit");
 			System.out.println("2. Withdraw");
 			System.out.println("3. Check balance");
 			System.out.println("4. Create account");
-			System.out.println("5. Close Account");
+			System.out.println("5. Close account");
 			System.out.println("6. Transfer funds");
-			System.out.println("7. Save Accounts");
+			System.out.println("0. Quit and Save Accounts");
 			System.out.println("Select an option: ");
 			selection = scan.nextInt();
 			scan.nextLine();
@@ -64,8 +62,10 @@ public class Main {
 			int toAcct = scan.nextInt();
 			System.out.println("How much money would you like to transfer? ");
 			amt = scan.nextInt();
+
 			bank.withdraw(fromAcct, amt);
-			bank.deposit(toAcct, amt);
+			bank.deposit(toAcct, amt); // need to check if both possible first
+			
 			break;
 		case 0:
 			bank.saveAccounts("Accounts.txt");
@@ -74,31 +74,5 @@ public class Main {
 		} }
 		while (!quit);
 		
-		
-	
-	
-	
-	/*
-	public static void example1()
-	{
-		
-		Bank bank = new Bank("Bank of CPHS");
-		int ewbankAccountNo = bank.createAccount("Mr. Ewbank");
-		int howardAccountNo = bank.createAccount("Mr. Howard");
-		
-		bank.deposit(ewbankAccountNo, 25);
-		bank.deposit(howardAccountNo, 75);
-
-		bank.checkBalance(ewbankAccountNo);
-		bank.checkBalance(howardAccountNo);
-		
-		bank.withdraw(ewbankAccountNo, 10);
-		bank.closeAccount(howardAccountNo);
-		
-		bank.checkBalance(ewbankAccountNo);
-		bank.checkBalance(howardAccountNo);
-		
-	}
-	*/
 	}
 }

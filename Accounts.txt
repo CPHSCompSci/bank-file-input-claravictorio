@@ -1,8 +1,0 @@
-Name: Clara
-Account Number: 1
-Balance: $96
-
-Name: Bob
-Account Number: 2
-Balance: $50
-

@@ -23,7 +23,7 @@ public class Bank {
 	public Bank(String name) {
 		this.name = name;
 		accounts = new ArrayList<>();
-		log("Bank Created");
+		log("Bank created");
 	}
 
 	public int createAccount(String name) {
@@ -106,21 +106,21 @@ public class Bank {
 		try {
 			File inputFile = new File("Accounts.txt");
 			Scanner fileIn = new Scanner(inputFile);
-			if (fileIn.hasNextLine())
+			while (fileIn.hasNextLine())
 			{
-			do {
 			String nameLine = fileIn.nextLine();
 			String acctNoLine = fileIn.nextLine();
 			String balanceLine = fileIn.nextLine();
 			fileIn.nextLine();
 			String name = nameLine.substring(6);
+			int acctNo = Integer.parseInt(acctNoLine.substring(16));
 			int balance = Integer.parseInt(balanceLine.substring(10));
-			Account acct = new Account(name, balance);
+			Account acct = new Account(name, acctNo, balance);
 			accounts.add(acct);
-			} while (fileIn.hasNextLine());
+			}
+			
 			fileIn.close();
 			log("Successfully loaded existing accounts");
-			}
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -155,10 +155,12 @@ public class Bank {
 			accountNumber = accountCounter++;
 		}
 		
-		private Account(String name, int balance) {
+		private Account(String name, int accountNumber, int balance) {
 			this.name = name;
+			this.accountNumber = accountNumber;
 			this.balance = balance;
-			accountNumber = accountCounter++;
+			if (accountNumber > accountCounter)
+				accountCounter = accountNumber + 1;
 		}
 
 		public String toString() {
