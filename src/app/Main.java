@@ -31,14 +31,14 @@ public class Main {
 			acctno = scan.nextInt();
 			System.out.println("How much would you like to deposit?");
 			amt = scan.nextInt();
-			bank.deposit(acctno, amt);
+			bank.deposit(acctno, amt, false);
 			break;
 		case 2:
 			System.out.println("Enter your account number: ");
 			acctno = scan.nextInt();
 			System.out.println("How much would you like to withdraw?");
 			amt = scan.nextInt();
-			bank.withdraw(acctno, amt);	
+			bank.withdraw(acctno, amt, false);	
 			break;
 		case 3:
 			System.out.println("Enter your account number: ");
@@ -62,10 +62,11 @@ public class Main {
 			int toAcct = scan.nextInt();
 			System.out.println("How much money would you like to transfer? ");
 			amt = scan.nextInt();
-
-			bank.withdraw(fromAcct, amt);
-			bank.deposit(toAcct, amt); // need to check if both possible first
-			
+			if (bank.withdraw(fromAcct, amt, true) && bank.deposit(toAcct, amt, true))
+			{
+				bank.withdraw(fromAcct, amt, false);
+				bank.deposit(toAcct, amt, false); // need to check if both possible first
+			}
 			break;
 		case 0:
 			bank.saveAccounts("Accounts.txt");

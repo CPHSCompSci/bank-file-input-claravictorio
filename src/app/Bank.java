@@ -45,8 +45,10 @@ public class Bank {
 		return true;
 	}
 
-	public boolean deposit(int accountNumber, int amount) {
+	public boolean deposit(int accountNumber, int amount, boolean test) {
 		Account account = findAccount(accountNumber);
+		if (!test)
+		{
 		if (account == null) {
 			log("Could not deposit to account " + accountNumber);
 			return false;
@@ -54,10 +56,21 @@ public class Bank {
 		account.balance += amount;
 		log("Successfully deposited $" + amount + " to " + account);
 		return true;
+		}
+		else
+		{
+			if (account == null) {
+				log("Could not deposit to account " + accountNumber);
+				return false;
+			}
+			return true;
+		}
 	}
 
-	public boolean withdraw(int accountNumber, int amount) {
+	public boolean withdraw(int accountNumber, int amount, boolean test) {
 		Account account = findAccount(accountNumber);
+		if (!test)
+		{
 		if (account == null) {
 			log("Could not withdraw from account " + accountNumber);
 			return false;
@@ -69,6 +82,19 @@ public class Bank {
 		account.balance -= amount;
 		log("Successfully withdrew $" + amount + " from " + account);
 		return true;
+		}
+		else
+		{
+			if (account == null) {
+				log("Could not withdraw from account " + accountNumber);
+				return false;
+			}
+			if (account.balance < amount) {
+				log("Insufficient funds in " + account);
+				return false;
+			}
+			return true;
+		}
 	}
 
 	public int checkBalance(int accountNumber) {
